@@ -26,18 +26,35 @@ public class Algorithm {
         }
         return null; 
     }
-
+    public int lengthOfLongestSubstring(String s) {
+       
+        if(s.length()==0) return 0;
+        HashMap<Character,Integer> maps=new HashMap<>();
+       int left=0;
+       int maxLength=0;
+       for(int right =0;right<s.length();right++){
+           if(maps.containsKey(s.charAt(right))){
+               left = Math.max(left, maps.get(s.charAt(right)) + 1);
+           }
+           maps.put(s.charAt(right), right);
+           maxLength=Math.max(maxLength, right -left+1);
+           
+       }
+       return maxLength;
+        
+    }
     public static void main(String[] args) {
 
         Algorithm algorithm = new Algorithm();
 
-        int[] nums = {2, 7, 11, 15};
-        int target = 9;
-
-        int[] result = algorithm.twoSum(nums, target);
-
-        // Print the result
-        System.out.println("Indices: [" + result[0] + ", " + result[1] + "]");
+//        int[] nums = {2, 7, 11, 15};
+//        int target = 9;
+//
+//        int[] result = algorithm.twoSum(nums, target);
+//
+//        // Print the result
+//        System.out.println("Indices: [" + result[0] + ", " + result[1] + "]");
+        System.out.println(algorithm.lengthOfLongestSubstring("abba"));
     }
 
 }
